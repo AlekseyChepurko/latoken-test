@@ -1,24 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { CitySearch } from "./features/city-search";
+import { TemperatureFilter } from "./features/temperature-filter";
+import { CitiesCards } from "./features/cities-cards";
+
+const mock = [
+  {
+    name: "string",
+    cityId: "string1",
+    temperature: "string",
+    wind: "string",
+    pressure: "string",
+  },
+  {
+    name: "string",
+    cityId: "string2",
+    temperature: "string",
+    wind: "string",
+    pressure: "string",
+  },
+  {
+    name: "string",
+    cityId: "string3",
+    temperature: "string",
+    wind: "string",
+    pressure: "string",
+  },
+  {
+    name: "string",
+    cityId: "string4",
+    temperature: "string",
+    wind: "string",
+    pressure: "string",
+  },
+];
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header">LaToken Test</header>
+
+      <CitySearch />
+
+      <TemperatureFilter min={0} max={100} />
+
+      <CitiesCards citiesInfo={mock} />
     </div>
   );
 }

@@ -1,1 +1,1 @@
-export * from './cities-cards.feature';
+export * from './cities-cards.container';

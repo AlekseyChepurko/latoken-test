@@ -9,21 +9,22 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import { useCallback } from "react";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 type CityCardProps = {
   name: string;
-  cityId: string;
-  temperature: string;
-  wind: string;
-  pressure: string;
-  onDelete: (id: string) => void;
+  cityId: number;
+  temperature: number;
+  wind: number;
+  pressure: number;
+  onDelete: (id: number) => void;
+  icon: string;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     card: {
-      boxShadow: "none",
+      border: '1px solid rgba(0, 0, 0, .5)',
       padding: "0.5rem",
     },
     header: {
@@ -33,6 +34,14 @@ const useStyles = makeStyles((theme: Theme) =>
     content: {
       padding: 0,
     },
+    temperature: {
+      display: "flex",
+      alignItems: "center",
+    },
+    icon: {
+      width: "3rem",
+      height: "3rem",
+    },
   })
 );
 
@@ -40,7 +49,7 @@ const CityCard: React.FC<CityCardProps> = (props) => {
   const classes = useStyles();
   const onDelete = useCallback(() => {
     props.onDelete(props.cityId);
-  }, [props.onDelete, props.cityId]);
+  }, [props]);
 
   return (
     <Card className={classes.card}>
@@ -56,12 +65,18 @@ const CityCard: React.FC<CityCardProps> = (props) => {
 
       <CardContent className={classes.content}>
         <Typography
-          align={"left"}
+          align={"justify"}
           variant="body2"
           color="textSecondary"
           component="div"
+          className={classes.temperature}
         >
-          <div>{props.temperature}</div>
+          <img
+            className={classes.icon}
+            src={`http://openweathermap.org/img/wn/${props.icon}@2x.png`}
+            alt=""
+          />
+          <div>{props.temperature > 0 ? `+${props.temperature}` : props.temperature}</div>
         </Typography>
 
         <Typography

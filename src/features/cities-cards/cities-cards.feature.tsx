@@ -2,14 +2,17 @@ import * as React from "react";
 import { CityCard } from "../../ui/organisms";
 import { createStyles, GridList, GridListTile, Theme } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useCallback } from "react";
 
 type CitiesCardsProps = {
+  removeCity?: (id: number) => void;
   citiesInfo: {
     name: string;
-    cityId: string;
-    temperature: string;
-    wind: string;
-    pressure: string;
+    cityId: number;
+    temperature: number;
+    wind: number;
+    pressure: number;
+    icon: string;
   }[];
 };
 
@@ -32,17 +35,27 @@ const useStyles = makeStyles((theme: Theme) =>
 const CitiesCards = (props: CitiesCardsProps) => {
   const classes = useStyles();
 
+  const removeCityProp = props.removeCity;
+
+  const removeCity = useCallback(
+    (id: number) => {
+      removeCityProp && removeCityProp(id);
+    },
+    [removeCityProp]
+  );
+
   return (
     <GridList cellHeight={200} className={classes.gridList} cols={3}>
       {props.citiesInfo.map((tile) => (
         <GridListTile key={tile.cityId}>
           <CityCard
-            name={"string;"}
-            cityId="string"
-            temperature={"string;"}
-            wind={"string;"}
-            pressure={"string;"}
-            onDelete={(id: string) => null}
+            name={tile.name}
+            cityId={tile.cityId}
+            temperature={tile.temperature}
+            wind={tile.wind}
+            icon={tile.icon}
+            pressure={tile.pressure}
+            onDelete={removeCity}
           />
         </GridListTile>
       ))}

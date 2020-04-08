@@ -3,48 +3,40 @@ import "./App.css";
 import { CitySearch } from "./features/city-search";
 import { TemperatureFilter } from "./features/temperature-filter";
 import { CitiesCards } from "./features/cities-cards";
+import { createStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-const mock = [
-  {
-    name: "string",
-    cityId: "string1",
-    temperature: "string",
-    wind: "string",
-    pressure: "string",
-  },
-  {
-    name: "string",
-    cityId: "string2",
-    temperature: "string",
-    wind: "string",
-    pressure: "string",
-  },
-  {
-    name: "string",
-    cityId: "string3",
-    temperature: "string",
-    wind: "string",
-    pressure: "string",
-  },
-  {
-    name: "string",
-    cityId: "string4",
-    temperature: "string",
-    wind: "string",
-    pressure: "string",
-  },
-];
+const useStyles = makeStyles(() =>
+  createStyles({
+    body: {
+      padding: "5rem",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "baseline",
+      justifyContent: "center",
+    },
+
+    filters: {
+      display: "flex",
+    },
+  })
+);
 
 function App() {
+  const classes = useStyles();
   return (
     <div className="App">
       <header className="App-header">LaToken Test</header>
 
-      <CitySearch />
+      <div className={classes.body}>
+        <div className={classes.filters}>
+          <CitySearch />
 
-      <TemperatureFilter min={0} max={100} />
+          <TemperatureFilter />
+        </div>
 
-      <CitiesCards citiesInfo={mock} />
+        <CitiesCards />
+      </div>
     </div>
   );
 }
